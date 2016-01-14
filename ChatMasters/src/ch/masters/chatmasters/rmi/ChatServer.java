@@ -5,6 +5,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import ch.masters.chatmasters.model.Message;
@@ -71,7 +72,15 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 
 	@Override
 	public void rmvClient(User client) throws RemoteException {
-		
+		System.out.println("logout " + client.getName());
+		int i=0;
+		for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); i++) {
+			User user = iterator.next();
+			if(user.getName().equals(client.getName())){
+				userList.remove(i);
+			}
+		}
+		System.out.println(userList.toString());
 	}
 
 }

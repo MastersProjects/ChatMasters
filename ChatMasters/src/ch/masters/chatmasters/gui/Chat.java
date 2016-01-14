@@ -57,10 +57,10 @@ public class Chat extends JFrame {
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setBounds(329, 201, 95, 23);
-		btnLogout.addActionListener(new LogoutListener(this.server, this, this.user));
+		btnLogout.addActionListener(new LogoutListener(this.server, this.user));
 		contentPane.add(btnLogout);
 		
-		addWindowListener(new LogoutListener(this.server, this, this.user));
+		addWindowListener(new LogoutListener(this.server, this.user));
 		setVisible(true);
 	}
 }

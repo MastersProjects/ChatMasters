@@ -17,10 +17,9 @@ public class LogoutListener implements ActionListener, WindowListener{
 	private JFrame frame;
 	private User user;
 	
-	public LogoutListener(ChatInterface server, JFrame frame, User user){
+	public LogoutListener(ChatInterface server, User user){
 		this.user = user;
 		this.server = server;
-		this.frame = frame;
 	}
 
 	private void logout(){
@@ -30,8 +29,6 @@ public class LogoutListener implements ActionListener, WindowListener{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println("logout");
-		frame.setVisible(false);
 		System.exit(0);
 	}
 	
