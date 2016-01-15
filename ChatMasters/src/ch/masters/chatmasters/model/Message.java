@@ -1,12 +1,16 @@
 package ch.masters.chatmasters.model;
 
-import java.io.Serializable;
 import java.security.Timestamp;
 
-public class Message implements Serializable {
+/**
+ * Model class for a Message
+ * @author Chiramed Phong Penglerd, Luca Marti, Elia Perenzin
+ * @version 1.0
+ * ChatMasters 2016
+ */
+public class Message {
 
-    private static final long serialVersionUID = -1724444053149327065L;
-
+	//Instanzvariablen
     private User sender;
     private String msg;
     private Timestamp time;
@@ -19,6 +23,7 @@ public class Message implements Serializable {
                 '}';
     }
 
+    //Getter and Setter
     public User getSender() {
         return sender;
     }

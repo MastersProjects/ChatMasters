@@ -11,10 +11,17 @@ import java.util.List;
 import ch.masters.chatmasters.model.Message;
 import ch.masters.chatmasters.model.User;
 
+/**
+ * Actual chatServer contains all implemented Methodes from 
+ * ChatInterface
+ * @author Chiramed Phong Penglerd, Luca Marti, Elia Perenzin
+ * @version 1.0
+ * ChatMasters 2016
+ */
 public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 
+	//Instanzvariablen
 	private static final long serialVersionUID = 1L;
-
 	private List<Message> messageList = new ArrayList<Message>();
 	private List<User> userList = new ArrayList<User>();
 
@@ -26,6 +33,10 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 		createServer(1257);
 	}
 
+	/**
+	 * Creates the Server
+	 * @param port
+	 */
 	private static void createServer(int port) {
 		Registry reg = null;
 		try {

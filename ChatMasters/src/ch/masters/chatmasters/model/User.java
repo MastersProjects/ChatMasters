@@ -1,12 +1,16 @@
 package ch.masters.chatmasters.model;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class User implements Serializable {
+/**
+ * Model class for a User
+ * @author Chiramed Phong Penglerd, Luca Marti, Elia Perenzin
+ * @version 1.0
+ * ChatMasters 2016
+ */
+public class User{
 
-    private static final long serialVersionUID = 8934670954363029150L;
-
+	//Instanzvariablen
     private String name;
     private boolean online;
     private Timestamp onlineTime;
@@ -25,6 +29,7 @@ public class User implements Serializable {
                 '}';
     }
 
+    //Getter and Setter
     public Timestamp getOnlineTime() {
         return onlineTime;
     }

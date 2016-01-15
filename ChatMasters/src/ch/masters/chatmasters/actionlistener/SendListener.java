@@ -10,12 +10,27 @@ import ch.masters.chatmasters.model.Message;
 import ch.masters.chatmasters.model.User;
 import ch.masters.chatmasters.rmi.ChatInterface;
 
+/**
+ * This is an ActionListener class for send 
+ * a Message from the chat. It contains an 
+ * KeyListener on Enter. 
+ * @author Chiramed Phong Penglerd, Luca Marti, Elia Perenzin
+ * @version 1.0
+ * ChatMasters 2016
+ */
 public class SendListener implements KeyListener {
 
+	//Instanzvariablen
 	private Message message;
 	private JTextField textPane;
 	private ChatInterface server;
 
+	/**
+	 * Constructor
+	 * @param server
+	 * @param message
+	 * @param user
+	 */
 	public SendListener(ChatInterface server, JTextField message, User user) {
 		this.server = server;
 		this.message = new Message();

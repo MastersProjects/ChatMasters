@@ -9,16 +9,34 @@ import java.rmi.RemoteException;
 import ch.masters.chatmasters.model.User;
 import ch.masters.chatmasters.rmi.ChatInterface;
 
+/**
+ * This is an ActionListener class for Logout 
+ * a user from the chat. It contains an 
+ * ActionListener and WindowListener.
+ * @author Chiramed Phong Penglerd, Luca Marti, Elia Perenzin
+ * @version 1.0
+ * ChatMasters 2016
+ */
 public class LogoutListener implements ActionListener, WindowListener{
 	
+	//Instanzvariablen
 	private ChatInterface server;
 	private User user;
 	
+	/**
+	 * Constructor 
+	 * @param server
+	 * @param user
+	 */
 	public LogoutListener(ChatInterface server, User user){
 		this.user = user;
 		this.server = server;
 	}
 
+	/**
+	 * Function for logout calls the 
+	 * Methode rmvClint on Server
+	 */
 	private void logout(){
 		try {
 			server.rmvClient(user);
@@ -29,6 +47,7 @@ public class LogoutListener implements ActionListener, WindowListener{
 		System.exit(0);
 	}
 	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		logout();

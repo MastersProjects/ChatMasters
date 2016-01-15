@@ -11,22 +11,25 @@ import javax.swing.JOptionPane;
 
 import ch.masters.chatmasters.gui.Chat;
 import ch.masters.chatmasters.model.User;
-
+/**
+ * Chat Client contains Main methode for the chat.
+ * @author Chiramed Phong Penglerd, Luca Marti, Elia Perenzin
+ * @version 1.0
+ * ChatMasters 2016
+ */
 public class ChatClient {
+	
+	//Instanzvariablen
 	private static ChatInterface server;
 	private static User user;
 
+	/**
+	 * Constuctor
+	 * @param name
+	 */
 	private ChatClient(String name) {
 		user = new User(name, false, null);
 		ChatClient.setUser(user);
-	}
-
-	public static User getUser() {
-		return ChatClient.user;
-	}
-
-	public static void setUser(User user) {
-		ChatClient.user = user;
 	}
 
 	public static void main(String[] args) {
@@ -43,6 +46,10 @@ public class ChatClient {
 		}
 	}
 
+	/**
+	 * Tries to connect to the Server if successful creates new GUI.
+	 * @param ip
+	 */
 	private static void connectServer(String ip) {
 		new ChatClient(
 				JOptionPane.showInputDialog(null, "Enter your Username!", "Welcome!", JOptionPane.INFORMATION_MESSAGE));
@@ -63,8 +70,26 @@ public class ChatClient {
 		}
 	}
 
+	/**
+	 * Gets the Server Interface for communication between 
+	 * Client and Server
+	 * @param ip
+	 * @return ChatInterface
+	 * @throws MalformedURLException
+	 * @throws RemoteException
+	 * @throws NotBoundException
+	 */
 	static ChatInterface getServer(String ip) throws MalformedURLException, RemoteException, NotBoundException {
 		ChatInterface server = (ChatInterface) Naming.lookup("rmi://" + ip + ":1257/RmiChat");
 		return server;
+	}
+	
+	//Getter and Setter
+	public static User getUser() {
+		return ChatClient.user;
+	}
+
+	public static void setUser(User user) {
+		ChatClient.user = user;
 	}
 }

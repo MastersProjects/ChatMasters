@@ -15,8 +15,15 @@ import ch.masters.chatmasters.rmi.ChatInterface;
 import ch.masters.chatmasters.thread.LoadMessagesThread;
 import ch.masters.chatmasters.thread.LoadOnlineThread;
 
+/**
+ * GUI Class for the Chat
+ * @author Chiramed Phong Penglerd, Luca Marti, Elia Perenzin
+ * @version 1.0
+ * ChatMasters 2016
+ */
 public class Chat extends JFrame {
 
+	//Instanzvariablen
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField message;
@@ -24,6 +31,11 @@ public class Chat extends JFrame {
 	private ChatInterface server;
 	private User user;
 
+	/**
+	 * Constructor
+	 * @param server
+	 * @param user
+	 */
 	public Chat(ChatInterface server, User user) {
 		this.server = server;
 		this.user = user; 
