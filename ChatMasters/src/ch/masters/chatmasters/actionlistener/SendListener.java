@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 import javax.swing.JTextField;
 
@@ -38,7 +39,7 @@ public class SendListener implements KeyListener {
 		this.message.setTime(timestamp);
 		this.message.setSender(user);
 		this.textPane = message; 
-		// message.setTime(new Timestamp());
+		this.message.setTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 	}
 
 	@Override

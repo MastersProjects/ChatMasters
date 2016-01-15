@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 
 import ch.masters.chatmasters.model.Message;
 import ch.masters.chatmasters.rmi.ChatInterface;
@@ -42,8 +44,12 @@ public class LoadMessagesThread {
 			    while (true) {
 			    	try {
 						msgarray = server.returnMessages();
-						chat.setText(msgarray.toString());
-					} catch (RemoteException e1) {
+						chat.setText("");
+						for(int i=0; i<msgarray.size(); i++){
+							StyledDocument document = (StyledDocument) chat.getDocument();
+						     document.insertString(document.getLength(), msgarray.get(i).getMsg() + System.lineSeparator(), null);
+						}
+					} catch (RemoteException | BadLocationException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
