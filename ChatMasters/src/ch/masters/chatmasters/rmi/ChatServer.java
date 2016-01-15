@@ -74,8 +74,8 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 	public void rmvClient(User client) throws RemoteException {
 		System.out.println("logout " + client.getName());
 		int i=0;
-		for (Iterator<User> iterator = userList.iterator(); iterator.hasNext(); i++) {
-			User user = iterator.next();
+		for (Iterator iterator = userList.iterator(); i<=userList.size(); i++) {
+			User user = (User) iterator.next();
 			if(user.getName().equals(client.getName())){
 				userList.remove(i);
 			}
