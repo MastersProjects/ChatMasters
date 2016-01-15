@@ -47,7 +47,7 @@ public class LoadMessagesThread {
 						chat.setText("");
 						for(int i=0; i<msgarray.size(); i++){
 							StyledDocument document = (StyledDocument) chat.getDocument();
-						     document.insertString(document.getLength(), msgarray.get(i).getMsg() + System.lineSeparator(), null);
+						     document.insertString(document.getLength(), msgarray.get(i).getTime().getHours() + ":" + msgarray.get(i).getTime().getMinutes() + " | " + msgarray.get(i).getMsg() + System.lineSeparator(), null);
 						}
 					} catch (RemoteException | BadLocationException e1) {
 						// TODO Auto-generated catch block
