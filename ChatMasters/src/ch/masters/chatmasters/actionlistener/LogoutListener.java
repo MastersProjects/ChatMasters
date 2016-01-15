@@ -6,15 +6,12 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
 
-import javax.swing.JFrame;
-
 import ch.masters.chatmasters.model.User;
 import ch.masters.chatmasters.rmi.ChatInterface;
 
 public class LogoutListener implements ActionListener, WindowListener{
 	
 	private ChatInterface server;
-	private JFrame frame;
 	private User user;
 	
 	public LogoutListener(ChatInterface server, User user){

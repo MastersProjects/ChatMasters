@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 import java.rmi.RemoteException;
 
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 
 import ch.masters.chatmasters.model.Message;
 import ch.masters.chatmasters.model.User;
