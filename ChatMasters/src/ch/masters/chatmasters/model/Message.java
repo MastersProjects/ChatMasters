@@ -1,5 +1,6 @@
 package ch.masters.chatmasters.model;
 
+import java.io.Serializable;
 import java.security.Timestamp;
 
 /**
@@ -8,8 +9,12 @@ import java.security.Timestamp;
  * @version 1.0
  * ChatMasters 2016
  */
-public class Message {
+public class Message implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//Instanzvariablen
     private User sender;
     private String msg;
