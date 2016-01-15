@@ -1,12 +1,15 @@
 package ch.masters.chatmasters.gui;
 
 
+import java.awt.GridLayout;
 import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
@@ -66,11 +69,14 @@ public class Chat extends JFrame {
 		contentPane.add(lblOnline);
 		
 		JTextPane chat = new JTextPane();
-		chat.setBounds(10, 36, 309, 125);
 		chat.setEditable(false);
-		contentPane.add(chat);
+		JScrollPane scrollpane = new JScrollPane(chat);
 		
-		new LoadMessagesThread(chat, server);
+		scrollpane.setBounds(10, 36, 309, 125);
+		scrollpane.getVerticalScrollBar().setValue(scrollpane.getVerticalScrollBar().getMaximum());
+		contentPane.add(scrollpane);
+		
+		new LoadMessagesThread(chat, server, user);
 		
 		message = new JTextField();
 		message.setBounds(10, 172, 309, 52);
