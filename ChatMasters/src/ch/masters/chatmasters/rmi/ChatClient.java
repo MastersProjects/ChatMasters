@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
@@ -33,6 +34,14 @@ public class ChatClient {
 	}
 
 	public static void main(String[] args) {
+		final String IPADDRESS_PATTERN = 
+				"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+				"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+				"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+				"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+
+		Pattern pattern = Pattern.compile(IPADDRESS_PATTERN);
+		
 		String[] buttons = { "Cancel", "Change IP", "Join Server" };
 
 		int rc = JOptionPane.showOptionDialog(null, "Welcome to ChatMasters", "Welcome",
@@ -40,7 +49,11 @@ public class ChatClient {
 		if (rc == 1) {
 			String ip = JOptionPane.showInputDialog(null, "Enter Server IP", "Change IP",
 					JOptionPane.INFORMATION_MESSAGE);
-			connectServer(ip);
+			if(pattern.matcher(ip).matches()){
+				connectServer(ip);
+			} else {
+				JOptionPane.showMessageDialog(null, "Invalid IP address", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		} else if (rc == 2) {
 			connectServer("localhost");
 		}
@@ -53,6 +66,7 @@ public class ChatClient {
 	private static void connectServer(String ip) {
 		new ChatClient(
 				JOptionPane.showInputDialog(null, "Enter your Username!", "Welcome!", JOptionPane.INFORMATION_MESSAGE));
+		//Check if user isn't already joined
 		if (ChatClient.getUser().getName().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Username can't be empty", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -65,7 +79,6 @@ public class ChatClient {
 
 			} catch (MalformedURLException | RemoteException | NotBoundException e) {
 				JOptionPane.showMessageDialog(null, "Server not found!", "Error", JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
 			}
 		}
 	}

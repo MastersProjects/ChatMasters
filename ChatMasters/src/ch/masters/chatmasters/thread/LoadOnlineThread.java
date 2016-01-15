@@ -1,10 +1,11 @@
 package ch.masters.chatmasters.thread;
 
 import java.rmi.RemoteException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 
 import ch.masters.chatmasters.model.User;
 import ch.masters.chatmasters.rmi.ChatInterface;
@@ -43,11 +44,12 @@ public class LoadOnlineThread {
 		    while (true) {
 		    	try {
 					userarray = server.returnClients();
-					for (Iterator<User> iterator = userarray.iterator(); iterator.hasNext();) {
-						User user = iterator.next();
-						online.setText(user.getName());
+					online.setText("");
+					for(int i=0; i<userarray.size(); i++){
+						StyledDocument document = (StyledDocument) online.getDocument();
+					     document.insertString(document.getLength(), userarray.get(i).getName() + System.lineSeparator(), null);
 					}
-				} catch (RemoteException e1) {
+				} catch (RemoteException | BadLocationException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
