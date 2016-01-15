@@ -36,16 +36,8 @@ public class SendListener implements KeyListener {
 	public SendListener(ChatInterface server, JTextField message, User user, Timestamp timestamp) {
 		this.server = server;
 		this.message = new Message();
-		this.message.setTime(timestamp);
 		this.message.setSender(user);
 		this.textPane = message; 
-		this.message.setTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -53,6 +45,7 @@ public class SendListener implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (!this.textPane.getText().isEmpty()) {
 				this.message.setMsg(this.textPane.getText());
+				this.message.setTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
 				this.textPane.setText("");
 				try {
 					server.send(this.message);
@@ -68,6 +61,12 @@ public class SendListener implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
