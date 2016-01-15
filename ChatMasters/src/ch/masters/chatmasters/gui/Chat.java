@@ -12,6 +12,8 @@ import ch.masters.chatmasters.actionlistener.LogoutListener;
 import ch.masters.chatmasters.actionlistener.SendListener;
 import ch.masters.chatmasters.model.User;
 import ch.masters.chatmasters.rmi.ChatInterface;
+import ch.masters.chatmasters.thread.LoadMessagesThread;
+import ch.masters.chatmasters.thread.LoadOnlineThread;
 
 public class Chat extends JFrame {
 
@@ -41,6 +43,8 @@ public class Chat extends JFrame {
 		online_textArea.setBounds(329, 36, 95, 154);
 		contentPane.add(online_textArea);
 		
+		new LoadOnlineThread(online_textArea, server);
+		
 		JLabel lblOnline = new JLabel("Online");
 		lblOnline.setBounds(329, 11, 46, 14);
 		contentPane.add(lblOnline);
@@ -49,6 +53,8 @@ public class Chat extends JFrame {
 		chat.setBounds(10, 36, 309, 125);
 		chat.setEditable(false);
 		contentPane.add(chat);
+		
+		new LoadMessagesThread(chat, server);
 		
 		message = new JTextField();
 		message.setBounds(10, 172, 309, 52);

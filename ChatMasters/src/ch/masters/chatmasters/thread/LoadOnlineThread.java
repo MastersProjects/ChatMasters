@@ -1,6 +1,7 @@
 package ch.masters.chatmasters.thread;
 
 import java.rmi.RemoteException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JTextPane;
@@ -26,7 +27,10 @@ public class LoadOnlineThread {
 		    while (true) {
 		    	try {
 					userarray = server.returnClients();
-					online.setText(userarray.toString());
+					for (Iterator<User> iterator = userarray.iterator(); iterator.hasNext();) {
+						User user = iterator.next();
+						online.setText(user.getName());
+					}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
