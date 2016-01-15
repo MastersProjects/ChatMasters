@@ -2,6 +2,7 @@ package ch.masters.chatmasters.gui;
 
 
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.sql.Timestamp;
 
 import javax.swing.JButton;
@@ -13,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.DefaultCaret;
 
 import ch.masters.chatmasters.actionlistener.LogoutListener;
 import ch.masters.chatmasters.actionlistener.SendListener;
@@ -73,7 +75,8 @@ public class Chat extends JFrame {
 		JScrollPane scrollpane = new JScrollPane(chat);
 		
 		scrollpane.setBounds(10, 36, 309, 125);
-		scrollpane.getVerticalScrollBar().setValue(scrollpane.getVerticalScrollBar().getMaximum());
+		
+		
 		contentPane.add(scrollpane);
 		
 		new LoadMessagesThread(chat, server, user);
