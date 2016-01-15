@@ -12,15 +12,15 @@ import javax.swing.JOptionPane;
 
 import ch.masters.chatmasters.gui.Chat;
 import ch.masters.chatmasters.model.User;
+
 /**
  * Chat Client contains Main methode for the chat.
  * @author Chiramed Phong Penglerd, Luca Marti, Elia Perenzin
- * @version 1.0
- * ChatMasters 2016
+ * @version 1.0 ChatMasters 2016
  */
 public class ChatClient {
-	
-	//Instanzvariablen
+
+	// Instanzvariablen
 	private static ChatInterface server;
 	private static User user;
 
@@ -34,14 +34,6 @@ public class ChatClient {
 	}
 
 	public static void main(String[] args) {
-		final String IPADDRESS_PATTERN = 
-				"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-				"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-				"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-				"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
-
-		Pattern pattern = Pattern.compile(IPADDRESS_PATTERN);
-		
 		String[] buttons = { "Cancel", "Change IP", "Join Server" };
 
 		int rc = JOptionPane.showOptionDialog(null, "Welcome to ChatMasters", "Welcome",
@@ -49,7 +41,7 @@ public class ChatClient {
 		if (rc == 1) {
 			String ip = JOptionPane.showInputDialog(null, "Enter Server IP", "Change IP",
 					JOptionPane.INFORMATION_MESSAGE);
-			if(pattern.matcher(ip).matches()){
+			if (checkIP(ip)) {
 				connectServer(ip);
 			} else {
 				JOptionPane.showMessageDialog(null, "Invalid IP address", "Error", JOptionPane.ERROR_MESSAGE);
@@ -66,7 +58,7 @@ public class ChatClient {
 	private static void connectServer(String ip) {
 		new ChatClient(
 				JOptionPane.showInputDialog(null, "Enter your Username!", "Welcome!", JOptionPane.INFORMATION_MESSAGE));
-		//Check if user isn't already joined
+		// Check if user isn't already joined
 		if (ChatClient.getUser().getName().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Username can't be empty", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -84,8 +76,7 @@ public class ChatClient {
 	}
 
 	/**
-	 * Gets the Server Interface for communication between 
-	 * Client and Server
+	 * Gets the Server Interface for communication between Client and Server
 	 * @param ip
 	 * @return ChatInterface
 	 * @throws MalformedURLException
@@ -96,8 +87,25 @@ public class ChatClient {
 		ChatInterface server = (ChatInterface) Naming.lookup("rmi://" + ip + ":1257/RmiChat");
 		return server;
 	}
-	
-	//Getter and Setter
+
+	/**
+	 * checks if an ip has an valid formatt
+	 * @param ip
+	 * @return boolean
+	 */
+	private static Boolean checkIP(String ip) {
+		final String IPADDRESS_PATTERN = "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+				+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+
+		Pattern pattern = Pattern.compile(IPADDRESS_PATTERN);
+		if (pattern.matcher(ip).matches()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// Getter and Setter
 	public static User getUser() {
 		return ChatClient.user;
 	}
