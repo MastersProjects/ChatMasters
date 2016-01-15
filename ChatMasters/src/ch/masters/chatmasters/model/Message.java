@@ -1,7 +1,8 @@
 package ch.masters.chatmasters.model;
 
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Model class for a Message
@@ -18,13 +19,15 @@ public class Message implements Serializable{
 	//Instanzvariablen
     private User sender;
     private String msg;
-    private Timestamp time;
+    Date date = new java.util.Date();
+    private Timestamp time = new Timestamp(date.getTime());
 
     @Override
     public String toString() {
         return "Message{" +
                 "sender=" + sender +
                 ", msg='" + msg + '\'' +
+                ", time='" + time + '\'' + 
                 '}';
     }
 

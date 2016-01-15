@@ -3,6 +3,7 @@ package ch.masters.chatmasters.actionlistener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.rmi.RemoteException;
+import java.sql.Timestamp;
 
 import javax.swing.JTextField;
 
@@ -31,11 +32,12 @@ public class SendListener implements KeyListener {
 	 * @param message
 	 * @param user
 	 */
-	public SendListener(ChatInterface server, JTextField message, User user) {
+	public SendListener(ChatInterface server, JTextField message, User user, Timestamp timestamp) {
 		this.server = server;
 		this.message = new Message();
+		this.message.setTime(timestamp);
 		this.message.setSender(user);
-		this.textPane = message;
+		this.textPane = message; 
 		// message.setTime(new Timestamp());
 	}
 

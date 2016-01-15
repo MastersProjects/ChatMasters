@@ -1,5 +1,8 @@
 package ch.masters.chatmasters.gui;
 
+
+import java.sql.Timestamp;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,6 +32,7 @@ public class Chat extends JFrame {
 	private JTextField message;
 	private JLabel lblWelcome;
 	private ChatInterface server;
+	private Timestamp timestamp;
 	private User user;
 
 	/**
@@ -70,7 +74,7 @@ public class Chat extends JFrame {
 		
 		message = new JTextField();
 		message.setBounds(10, 172, 309, 52);
-		message.addKeyListener(new SendListener(this.server, message, this.user));
+		message.addKeyListener(new SendListener(this.server, message, this.user, this.timestamp));
 		contentPane.add(message);
 		
 		JButton btnLogout = new JButton("Logout");
