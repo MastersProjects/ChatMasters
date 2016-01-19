@@ -35,9 +35,11 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 	/**
 	 * Creates the Server
 	 * @param port
+	 * @return 
 	 */
-	public static void createServer(int port) {
+	public static ChatServer createServer(int port) {
 		Registry reg = null;
+		ChatServer server = null;
 		try {
 			System.out.println("RMI server started");
 			try {
@@ -48,7 +50,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 				System.out.println("RMI registry failed.");
 				e.printStackTrace();
 			}
-			ChatServer server = new ChatServer();
+			server = new ChatServer();
 			reg.rebind("RmiChat", server);
 			System.out.println("[System] Server ready");
 			
@@ -56,6 +58,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 			System.out.println("[System] Server failed: " + e);
 			e.printStackTrace();
 		}
+		return server;
 	}
 
 	@Override
