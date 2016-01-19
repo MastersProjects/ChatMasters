@@ -55,7 +55,7 @@ public class ChatClient {
 	 * Tries to connect to the Server if successful creates new GUI.
 	 * @param ip
 	 */
-	private static void connectServer(String ip) {
+	public static void connectServer(String ip) {
 		new ChatClient(
 				JOptionPane.showInputDialog(null, "Enter your Username!", "Welcome!", JOptionPane.INFORMATION_MESSAGE));
 		// Check if user isn't already joined
