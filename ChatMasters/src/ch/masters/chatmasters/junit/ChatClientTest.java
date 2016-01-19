@@ -1,34 +1,43 @@
 package ch.masters.chatmasters.junit;
 
-import static org.junit.Assert.*;
+import java.util.Arrays;
+import java.util.Collection;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+import ch.masters.chatmasters.rmi.ChatClient;
+import junit.framework.Assert;
+
+/**
+ * JUnit test for the RegEx of ip
+ * @author Chiramed Phong Penglerd, Elia Perenzin, Luca Marti
+ * @version 1.0
+ */
+@SuppressWarnings("deprecation")
+@RunWith(Parameterized.class)
 public class ChatClientTest {
+	private static ChatClient chatClient;
+	private String ip;
+	private boolean result;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	public ChatClientTest(String ip, boolean result) {
+		this.ip = ip;
+		this.result = result;
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
+	@Parameters
+	public static Collection<Object[]> values() {
+		return Arrays.asList(new Object[][] { { "192.168.1.1", true }, { "1.1.1.1", true }, { "This is an ip", false },
+				{ "256.256.256.256", false }, { "10.10.10.10", true }, { "127.0.0.1", true },
+				{ "10.127.127.260", false } });
 	}
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		boolean check = chatClient.checkIP(ip);
+		Assert.assertEquals(check, result);
 	}
-
 }

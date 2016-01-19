@@ -28,7 +28,7 @@ public class ChatClient {
 	 * Constuctor
 	 * @param name
 	 */
-	private ChatClient(String name) {
+	public ChatClient(String name) {
 		user = new User(name, false, null);
 		ChatClient.setUser(user);
 	}
@@ -93,7 +93,7 @@ public class ChatClient {
 	 * @param ip
 	 * @return boolean
 	 */
-	private static Boolean checkIP(String ip) {
+	public static Boolean checkIP(String ip) {
 		final String IPADDRESS_PATTERN = "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
 				+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
