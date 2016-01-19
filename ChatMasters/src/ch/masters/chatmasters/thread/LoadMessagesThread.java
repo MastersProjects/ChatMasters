@@ -1,6 +1,7 @@
 package ch.masters.chatmasters.thread;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTextPane;
@@ -22,7 +23,8 @@ import ch.masters.chatmasters.rmi.ChatInterface;
 public class LoadMessagesThread {
 	
 	//Instanzvariablen
-	private List<Message> msgarray;
+	private ArrayList<Message> serverMessageList;
+	private ArrayList<Message> clientMessageList;
 	private JTextPane chat; 
 	private ChatInterface server;
 	private User user;
@@ -36,6 +38,7 @@ public class LoadMessagesThread {
 		this.chat = chat;
 		this.server = server;
 		this.user = user;
+		
 		loadMessages();
 	}
 	
@@ -49,14 +52,21 @@ public class LoadMessagesThread {
 			  public void run() {
 			    while (true) {
 			    	try {
-						msgarray = server.returnMessages();
-						chat.setText("");
-						for(int i=0; i<msgarray.size(); i++){
-							StyledDocument document = (StyledDocument) chat.getDocument();
-							String message = msgarray.get(i).getTime().getHours() + ":" + msgarray.get(i).getTime().getMinutes() + " " + msgarray.get(i).getSender().getName() + " | " + msgarray.get(i).getMsg();
-							document.insertString(document.getLength(), message + System.lineSeparator(), null);
-
-						}
+			    		serverMessageList = server.returnMessages();
+			    		clientMessageList = user.getMessageList();
+			    		
+			    		int difference = serverMessageList.size() - clientMessageList.size();			    		
+			    		int end = serverMessageList.size() - 1;
+			    		
+			    		for(int start = serverMessageList.size()-difference; start<=end; start++){
+			    			StyledDocument document = (StyledDocument) chat.getDocument();
+			    			String message = serverMessageList.get(start).getTime().getHours() + ":" + serverMessageList.get(start).getTime().getMinutes() + " " + serverMessageList.get(start).getSender().getName() + " | " + serverMessageList.get(start).getMsg();
+			    			document.insertString(document.getLength(), message + System.lineSeparator(), null);
+			    			
+			    		}
+			    		
+			    		user.setMessageList(serverMessageList);
+			    		
 					} catch (RemoteException | BadLocationException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

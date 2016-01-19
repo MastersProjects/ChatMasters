@@ -21,8 +21,8 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 
 	//Instanzvariablen
 	private static final long serialVersionUID = 1L;
-	private List<Message> messageList = new ArrayList<Message>();
-	private List<User> userList = new ArrayList<User>();
+	private ArrayList<Message> messageList = new ArrayList<Message>();
+	private ArrayList<User> userList = new ArrayList<User>();
 
 	protected ChatServer() throws RemoteException {
 		super(0);
@@ -65,12 +65,12 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 	}
 
 	@Override
-	public List<Message> returnMessages() throws RemoteException {
+	public ArrayList<Message> returnMessages() throws RemoteException {
 		return this.messageList;
 	}
 
 	@Override
-	public List<User> returnClients() throws RemoteException {
+	public ArrayList<User> returnClients() throws RemoteException {
 		return this.userList;
 	}
 
@@ -91,5 +91,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 		}
 		System.out.println(userList.toString());
 	}
+	
+	
 
 }

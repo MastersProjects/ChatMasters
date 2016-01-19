@@ -2,6 +2,7 @@ package ch.masters.chatmasters.rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import ch.masters.chatmasters.model.Message;
@@ -27,14 +28,14 @@ public interface ChatInterface extends Remote {
      * @return List{@link Message}
      * @throws RemoteException
      */
-    List<Message> returnMessages() throws RemoteException;
+    ArrayList<Message> returnMessages() throws RemoteException;
 
     /**
      * Returns all clients on the server
      * @return @return List{@link User}
      * @throws RemoteException
      */
-    List<User> returnClients() throws RemoteException;
+    ArrayList<User> returnClients() throws RemoteException;
 
     /**
      * Add client to Server

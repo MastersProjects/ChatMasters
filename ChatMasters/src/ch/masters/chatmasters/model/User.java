@@ -2,6 +2,7 @@ package ch.masters.chatmasters.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Model class for a User
@@ -19,6 +20,7 @@ public class User implements Serializable{
     private String name;
     private boolean online;
     private Timestamp onlineTime;
+    private ArrayList<Message> messageList = new ArrayList<Message>();
 
     public User(String name, Boolean online, Timestamp time) {
         this.setOnlineTime(time);
@@ -58,5 +60,13 @@ public class User implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+
+	public ArrayList<Message> getMessageList() {
+		return messageList;
+	}
+
+	public void setMessageList(ArrayList<Message> messageList) {
+		this.messageList = messageList;
+	}
 
 }
