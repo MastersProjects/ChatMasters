@@ -54,6 +54,7 @@ public class Chat extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
 		contentPane.setLayout(null);
 		
 		lblWelcome = new JLabel("Welcome " + user.getName());
@@ -73,7 +74,6 @@ public class Chat extends JFrame {
 		JTextPane chat = new JTextPane();
 		chat.setEditable(false);
 		JScrollPane scrollpane = new JScrollPane(chat);
-		
 		scrollpane.setBounds(10, 36, 309, 125);
 		
 		
