@@ -13,6 +13,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
 
@@ -73,8 +74,10 @@ public class Chat extends JFrame {
 		
 		JTextPane chat = new JTextPane();
 		chat.setEditable(false);
-		JScrollPane scrollpane = new JScrollPane(chat);
+		JScrollPane scrollpane = new JScrollPane(chat, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollpane.setBounds(10, 36, 309, 125);
+
+		scrollpane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		
 		contentPane.add(scrollpane);
@@ -82,9 +85,10 @@ public class Chat extends JFrame {
 		new LoadMessagesThread(chat, server, user);
 		
 		message = new JTextField();
-		message.setBounds(10, 172, 309, 52);
 		message.addKeyListener(new SendListener(this.server, message, this.user, this.timestamp));
-		contentPane.add(message);
+		JScrollPane scrollMessagePane = new JScrollPane(message,JScrollPane.VERTICAL_SCROLLBAR_NEVER,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollMessagePane.setBounds(10, 172, 309, 52);
+		contentPane.add(scrollMessagePane);
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setBounds(329, 201, 95, 23);
