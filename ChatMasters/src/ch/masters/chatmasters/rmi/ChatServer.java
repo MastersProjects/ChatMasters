@@ -24,7 +24,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 	private ArrayList<Message> messageList = new ArrayList<Message>();
 	private ArrayList<User> userList = new ArrayList<User>();
 
-	protected ChatServer() throws RemoteException {
+	public ChatServer() throws RemoteException {
 		super(0);
 	}
 
@@ -36,7 +36,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 	 * Creates the Server
 	 * @param port
 	 */
-	private static void createServer(int port) {
+	public static void createServer(int port) {
 		Registry reg = null;
 		try {
 			System.out.println("RMI server started");
