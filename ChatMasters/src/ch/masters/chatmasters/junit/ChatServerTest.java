@@ -1,13 +1,12 @@
 package ch.masters.chatmasters.junit;
 
 import java.rmi.RemoteException;
-import java.util.Collection;
+import java.sql.Timestamp
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 import ch.masters.chatmasters.model.Message;
 import ch.masters.chatmasters.rmi.ChatClient;
@@ -22,30 +21,49 @@ import junit.framework.Assert;
 @SuppressWarnings("deprecation")
 public class ChatServerTest {
 	private static ChatServer chatServer;
-	private Message message;
-	private int endSize;
-	private int startSize;
-
+	private int totalUser;
+	private ArrayList<Users> users;
 
 	public ChatServerTest() {
-		chatServer = ChatServer.createServer(1257);
-		message = new Message();
+		totalUsers = 4;
+		users = new ArrayList<User>();
 	}
 
 	@Before
 	public void before() throws RemoteException {
-		int iterrations = 6;
-		startSize = chatServer.returnMessages().size();
+		chatServer = ChatServer.createServer(1257);
 		
-		for (int i = 0; i<iterrations; i++){
-			chatServer.send(message);
+		for(int i = 0; i < totalUsers; i++){
+			String username = "User"+(i+1);
+			User user new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMilis()));
+			user.add(user);
 		}
-		
-		endSize = chatServer.returnMessages().size()-iterrations;
 	}
 	
 	@Test
 	public void checkSend() throws RemoteException {
+		
+		int iterrations = 6;
+		int startSize = chatServer.returnMessages().size();
+		
+		for(int i = 0; i < iterrations; i++){
+			chatServer.send(new Message());
+		}
+		
+		int endSize = chatServer.returnMessages().size()-iterrations;
 		Assert.assertEquals(endSize, startSize);
+	}
+	
+	@Test
+	public void checkRmvClient() throws RemoteException {
+		
+		int removeClients = 2;
+		
+		for(int i = 0; i < removeClients; i++){
+			chatServer.rmvClient(users.get(i));
+		}
+		
+		int totClientsAftRmv = chatServer.returnClients().size();
+		Assert.assertEquals(totalUsers-removeClients, totClientsAftRmv);
 	}
 }
