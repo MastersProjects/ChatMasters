@@ -21,7 +21,7 @@ import junit.framework.Assert;
 @SuppressWarnings("deprecation")
 public class ChatServerTest {
 	private static ChatServer chatServer;
-	private int totalUser;
+	private int totalUsers;
 	private ArrayList<Users> users;
 
 	public ChatServerTest() {
