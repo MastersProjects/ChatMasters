@@ -25,7 +25,7 @@ public class ChatClient {
 	private static User user;
 
 	/**
-	 * Constuctor
+	 * Constuctor 
 	 * @param name
 	 */
 	public ChatClient(String name) {
@@ -64,11 +64,16 @@ public class ChatClient {
 		} else {
 			try {
 				server = ChatClient.getServer(ip);
-				user.setOnline(true);
-				user.setOnlineTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-				server.setClient(user);
-				new Chat(server, user);
 
+				if(checkUserOnline(user, server)){
+					JOptionPane.showMessageDialog(null, "Username already online", "Error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					user.setOnline(true);
+					user.setOnlineTime(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+					server.setClient(user);
+					new Chat(server, user);
+				}
+				
 			} catch (MalformedURLException | RemoteException | NotBoundException e) {
 				JOptionPane.showMessageDialog(null, "Server not found!", "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -103,6 +108,27 @@ public class ChatClient {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Check if a user with the same name is already online
+	 * @param user
+	 * @param server
+	 * @return alreadyOn
+	 */
+	public static Boolean checkUserOnline(User user, ChatInterface server) {
+		Boolean alreadyOn = false;
+		try {
+			for (int i = 0; i < server.returnClients().size(); i++) {
+				if (server.returnClients().get(i).getName().equals(user.getName())) {
+					alreadyOn = true;
+				}
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return alreadyOn;
 	}
 
 	// Getter and Setter

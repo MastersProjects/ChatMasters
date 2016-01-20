@@ -59,10 +59,21 @@ public class LoadMessagesThread {
 			    		int end = serverMessageList.size() - 1;
 			    		
 			    		for(int start = serverMessageList.size()-difference; start<=end; start++){
+			    			SimpleAttributeSet styleAttribute = new SimpleAttributeSet();
+							
+							
 			    			StyledDocument document = (StyledDocument) chat.getDocument();
 			    			String message = serverMessageList.get(start).getTime().getHours() + ":" + serverMessageList.get(start).getTime().getMinutes() + " " + serverMessageList.get(start).getSender().getName() + " | " + serverMessageList.get(start).getMsg();
-			    			document.insertString(document.getLength(), message + System.lineSeparator(), null);
 			    			
+			    			if (serverMessageList.get(start).getSender().getName().equals(user.getName())){
+			    				StyleConstants.setAlignment(styleAttribute, StyleConstants.ALIGN_RIGHT);
+			    				document.setParagraphAttributes(document.getLength()+1, 1, styleAttribute, false);
+			    			} else {
+			    				StyleConstants.setAlignment(styleAttribute, StyleConstants.ALIGN_LEFT);
+			    				document.setParagraphAttributes(document.getLength()+1, 1, styleAttribute, false);
+			    			}
+			    			
+			    			document.insertString(document.getLength(), message + System.lineSeparator(), null);
 			    		}
 			    		
 			    		user.setMessageList(serverMessageList);
