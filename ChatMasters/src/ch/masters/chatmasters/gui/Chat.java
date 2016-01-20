@@ -82,7 +82,7 @@ public class Chat extends JFrame {
 		
 		contentPane.add(scrollpane);
 		
-		new LoadMessagesThread(chat, server, user);
+		new LoadMessagesThread(chat, server, user, scrollpane);
 		
 		message = new JTextField();
 		message.addKeyListener(new SendListener(this.server, message, this.user, this.timestamp));
