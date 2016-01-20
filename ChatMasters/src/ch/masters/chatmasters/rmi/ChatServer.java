@@ -95,6 +95,13 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 		System.out.println(userList.toString());
 	}
 	
+	@Override
+	public void closeServer(int status) throws RemoteException {
+		System.out.println("Shuts down the server...");
+		System.out.ptintln("bye bye");
+		System.exit(status);
+	}
+	
 	
 
 }
