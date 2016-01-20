@@ -2,7 +2,6 @@ package ch.masters.chatmasters.thread;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -60,15 +59,15 @@ public class LoadMessagesThread {
 			    		
 			    		for(int start = serverMessageList.size()-difference; start<=end; start++){
 			    			SimpleAttributeSet styleAttribute = new SimpleAttributeSet();
-							
-							
 			    			StyledDocument document = (StyledDocument) chat.getDocument();
-			    			String message = serverMessageList.get(start).getTime().getHours() + ":" + serverMessageList.get(start).getTime().getMinutes() + " " + serverMessageList.get(start).getSender().getName() + " | " + serverMessageList.get(start).getMsg();
+			    			String message;		  
 			    			
 			    			if (serverMessageList.get(start).getSender().getName().equals(user.getName())){
+			    				message = serverMessageList.get(start).getMsg() + " | " + serverMessageList.get(start).getSender().getName() + " " + serverMessageList.get(start).getTime().getHours() + ":" + serverMessageList.get(start).getTime().getMinutes();
 			    				StyleConstants.setAlignment(styleAttribute, StyleConstants.ALIGN_RIGHT);
 			    				document.setParagraphAttributes(document.getLength()+1, 1, styleAttribute, false);
 			    			} else {
+			    				message = serverMessageList.get(start).getTime().getHours() + ":" + serverMessageList.get(start).getTime().getMinutes() + " " + serverMessageList.get(start).getSender().getName() + " | " + serverMessageList.get(start).getMsg();
 			    				StyleConstants.setAlignment(styleAttribute, StyleConstants.ALIGN_LEFT);
 			    				document.setParagraphAttributes(document.getLength()+1, 1, styleAttribute, false);
 			    			}
