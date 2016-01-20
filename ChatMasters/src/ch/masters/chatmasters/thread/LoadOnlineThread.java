@@ -13,16 +13,15 @@ import ch.masters.chatmasters.rmi.ChatInterface;
 /**
  * Interface with all Methodes that are used for the chat
  * @author Chiramed Phong Penglerd, Luca Marti, Elia Perenzin
- * @version 1.0
- * ChatMasters 2016
+ * @version 1.0 ChatMasters 2016
  */
 public class LoadOnlineThread {
 
-	//Instanzvariablen
+	// Instanzvariablen
 	private List<User> userarray;
-	private JTextPane online; 
+	private JTextPane online;
 	private ChatInterface server;
-	
+
 	/**
 	 * Consturctor
 	 * @param online
@@ -33,32 +32,40 @@ public class LoadOnlineThread {
 		this.server = server;
 		loadUsers();
 	}
-	
+
 	/**
-	 * Thread which loads all online users from the server
-	 * Sleeps 500ms
+	 * Thread which loads all online users from the server Sleeps 500ms
 	 */
-	private void loadUsers(){
-	new Thread(new Runnable() {
-		  public void run() {
-		    while (true) {
-		    	try {
-					userarray = server.returnClients();
-					online.setText("");
-					for(int i=0; i<userarray.size(); i++){
-						StyledDocument document = (StyledDocument) online.getDocument();
-					     document.insertString(document.getLength(), userarray.get(i).getName() + System.lineSeparator(), null);
-					}
-				} catch (RemoteException | BadLocationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+	private void loadUsers() {
+		new Thread(new Runnable() {
+			public void run() {
+				usersThred();
+			}
+		}).start();
+	}
+
+	/**
+	 * Contains the implementation of the Thread
+	 */
+	public void usersThred() {
+		while (true) {
+			try {
+				userarray = server.returnClients();
+				online.setText("");
+				for (int i = 0; i < userarray.size(); i++) {
+					StyledDocument document = (StyledDocument) online.getDocument();
+					document.insertString(document.getLength(), userarray.get(i).getName() + System.lineSeparator(),
+							null);
 				}
-		      try {
-		    	  Thread.sleep(500);
-		    	 } catch (InterruptedException e) {
-		    		 e.printStackTrace();
-		    	 }
-		    }
-		  }}).start();
+			} catch (RemoteException | BadLocationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
