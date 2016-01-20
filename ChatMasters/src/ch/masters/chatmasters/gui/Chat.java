@@ -63,6 +63,7 @@ public class Chat extends JFrame {
 		contentPane.add(lblWelcome);
 		
 		JTextPane online_textArea = new JTextPane();
+		online_textArea.setEditable(false);
 		online_textArea.setBounds(329, 36, 95, 154);
 		contentPane.add(online_textArea);
 		
@@ -78,8 +79,6 @@ public class Chat extends JFrame {
 		scrollpane.setBounds(10, 36, 309, 125);
 
 		scrollpane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
-		
 		contentPane.add(scrollpane);
 		
 		new LoadMessagesThread(chat, server, user);

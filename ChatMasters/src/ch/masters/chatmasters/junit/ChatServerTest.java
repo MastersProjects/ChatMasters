@@ -5,13 +5,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import org.junit.Before;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ch.masters.chatmasters.model.Message;
 import ch.masters.chatmasters.model.User;
-import ch.masters.chatmasters.rmi.ChatClient;
 import ch.masters.chatmasters.rmi.ChatServer;
 import junit.framework.Assert;
 
@@ -36,19 +35,13 @@ public class ChatServerTest {
 		chatServer = ChatServer.createServer(1257);
 	}
 	
-	@Before
-	public void before() throws RemoteException {
-		for(int i = 0; i < totalUsers; i++){
-			String username = "User"+(i+1);
-			User user = new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis()));
-			chatServer.setClient(user);
-			users.add(user);
-		}
+	@After
+	public void after() throws RemoteException {
+		chatServer.resetServer();
 	}
 	
 	@Test
 	public void checkSend() throws RemoteException {
-		
 		int iterrations = 6;
 		int startSize = chatServer.returnMessages().size();
 		
@@ -62,8 +55,14 @@ public class ChatServerTest {
 	
 	@Test
 	public void checkRmvClient() throws RemoteException {
-		
 		int removeClients = 2;
+		
+		for(int i = 0; i < totalUsers; i++){
+			String username = "User"+(i+1);
+			User user = new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis()));
+			chatServer.setClient(user);
+			users.add(user);
+		}
 		
 		for(int i = 0; i < removeClients; i++){
 			chatServer.rmvClient(users.get(i));
@@ -72,4 +71,19 @@ public class ChatServerTest {
 		int totClientsAftRmv = chatServer.returnClients().size();
 		Assert.assertEquals(totalUsers-removeClients, totClientsAftRmv);
 	}
+	
+	@Test
+	public void checkSetClient() throws RemoteException {
+		int iterrations = 6;
+		int startSize = chatServer.returnClients().size();
+		
+		for(int i = 0; i < iterrations; i++){
+			String username = "User"+(i+1);
+			chatServer.setClient(new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis())));
+		}
+		
+		int endSize = chatServer.returnMessages().size();
+		Assert.assertEquals(endSize, startSize);
+	}
+	
 }

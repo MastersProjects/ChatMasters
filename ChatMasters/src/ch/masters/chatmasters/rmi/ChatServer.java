@@ -7,6 +7,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.masters.chatmasters.gui.Server;
 import ch.masters.chatmasters.model.Message;
 import ch.masters.chatmasters.model.User;
 
@@ -53,6 +54,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 			server = new ChatServer();
 			reg.rebind("RmiChat", server);
 			System.out.println("[System] Server ready");
+			new Server(server);
 			
 		} catch (Exception e) {
 			System.out.println("[System] Server failed: " + e);
@@ -97,11 +99,15 @@ public class ChatServer extends UnicastRemoteObject implements ChatInterface {
 	
 	@Override
 	public void closeServer(int status) throws RemoteException {
-		System.out.println("Shuts down the server...");
+		System.out.println("Shut down server...");
 		System.out.println("bye bye");
 		System.exit(status);
 	}
-	
-	
 
+	@Override
+	public void resetServer() throws RemoteException {
+		messageList.clear();
+		userList.clear();
+		System.out.println("Server restarted...");
+	}
 }
