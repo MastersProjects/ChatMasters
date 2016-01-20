@@ -3,6 +3,7 @@ package ch.masters.chatmasters.thread;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
