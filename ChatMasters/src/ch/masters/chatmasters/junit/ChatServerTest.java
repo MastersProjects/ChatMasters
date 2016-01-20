@@ -1,7 +1,7 @@
 package ch.masters.chatmasters.junit;
 
 import java.rmi.RemoteException;
-import java.sql.Timestamp
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.masters.chatmasters.model.Message;
+import ch.masters.chatmasters.model.User;
 import ch.masters.chatmasters.rmi.ChatClient;
 import ch.masters.chatmasters.rmi.ChatServer;
 import junit.framework.Assert;
@@ -22,7 +23,7 @@ import junit.framework.Assert;
 public class ChatServerTest {
 	private static ChatServer chatServer;
 	private int totalUsers;
-	private ArrayList<Users> users;
+	private ArrayList<User> users;
 
 	public ChatServerTest() {
 		totalUsers = 4;
@@ -35,8 +36,8 @@ public class ChatServerTest {
 		
 		for(int i = 0; i < totalUsers; i++){
 			String username = "User"+(i+1);
-			User user new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMilis()));
-			user.add(user);
+			User user new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis()));
+			users.add(user);
 		}
 	}
 	
