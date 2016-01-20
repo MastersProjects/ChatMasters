@@ -3,6 +3,7 @@ package ch.masters.chatmasters.thread;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
@@ -27,16 +28,18 @@ public class LoadMessagesThread {
 	private JTextPane chat; 
 	private ChatInterface server;
 	private User user;
+	private JScrollPane scrollpane;
 	
 	/**
 	 * Constructor
 	 * @param chat
 	 * @param server
 	 */
-	public LoadMessagesThread(JTextPane chat, ChatInterface server, User user) {
+	public LoadMessagesThread(JTextPane chat, ChatInterface server, User user, JScrollPane scrollpane) {
 		this.chat = chat;
 		this.server = server;
 		this.user = user;
+		this.scrollpane = scrollpane;
 		
 		loadMessages();
 	}
@@ -73,6 +76,7 @@ public class LoadMessagesThread {
 			    			}
 			    			
 			    			document.insertString(document.getLength(), message + System.lineSeparator(), null);
+			    			scrollpane.getVerticalScrollBar().setValue(scrollpane.getVerticalScrollBar().getMaximum());
 			    		}
 			    		
 			    		user.setMessageList(serverMessageList);
