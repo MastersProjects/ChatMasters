@@ -50,4 +50,11 @@ public interface ChatInterface extends Remote {
      * @throws RemoteException
      */
     void rmvClient(User client) throws RemoteException;
+    
+    /**
+     * Shuts down the server
+     * @param status
+     * @throws RemoteException
+     */
+     void closeServer(int status) throws RemoteException;
 }
