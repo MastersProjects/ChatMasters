@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ch.masters.chatmasters.model.Message;
@@ -30,13 +31,16 @@ public class ChatServerTest {
 		users = new ArrayList<User>();
 	}
 
+	@BeforeClass
+	public static void beforeClass(){
+		chatServer = ChatServer.createServer(1257);
+	}
+	
 	@Before
 	public void before() throws RemoteException {
-		chatServer = ChatServer.createServer(1257);
-		
 		for(int i = 0; i < totalUsers; i++){
 			String username = "User"+(i+1);
-			User user new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis()));
+			User user = new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis()));
 			users.add(user);
 		}
 	}
