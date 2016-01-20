@@ -41,6 +41,7 @@ public class ChatServerTest {
 		for(int i = 0; i < totalUsers; i++){
 			String username = "User"+(i+1);
 			User user = new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis()));
+			chatServer.setClient(user);
 			users.add(user);
 		}
 	}
