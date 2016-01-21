@@ -22,12 +22,9 @@ import junit.framework.Assert;
 @SuppressWarnings("deprecation")
 public class ChatServerTest {
 	private static ChatServer chatServer;
-	private int totalUsers;
-	private ArrayList<User> users;
 
 	public ChatServerTest() {
-		totalUsers = 4;
-		users = new ArrayList<User>();
+
 	}
 
 	@BeforeClass
@@ -55,7 +52,9 @@ public class ChatServerTest {
 	
 	@Test
 	public void checkRmvClient() throws RemoteException {
+		int addClients = 4;
 		int removeClients = 2;
+		ArrayList<User> users = new ArrayList<User>();
 		
 		for(int i = 0; i < totalUsers; i++){
 			String username = "User"+(i+1);
@@ -74,16 +73,16 @@ public class ChatServerTest {
 	
 	@Test
 	public void checkSetClient() throws RemoteException {
-		int iterrations = 6;
+		int addClients = 6;
 		int startSize = chatServer.returnClients().size();
 		
-		for(int i = 0; i < iterrations; i++){
+		for(int i = 0; i < addClients; i++){
 			String username = "User"+(i+1);
 			chatServer.setClient(new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis())));
 		}
 		
-		int endSize = chatServer.returnMessages().size();
-		Assert.assertEquals(endSize, startSize);
+		int endSize = chatServer.returnClients().size();
+		Assert.assertEquals(startSize + addClients, endSize);
 	}
 	
 }
