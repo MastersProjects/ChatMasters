@@ -3,7 +3,6 @@ package ch.masters.chatmasters.rmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 import ch.masters.chatmasters.model.Message;
 import ch.masters.chatmasters.model.User;

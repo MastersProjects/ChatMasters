@@ -35,6 +35,7 @@ public class ChatClientTest {
 				{ "10.127.127.260", false } });
 	}
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void test() {
 		boolean check = chatClient.checkIP(ip);

@@ -57,6 +57,7 @@ public class LoadMessagesThread {
 	/**
 	 * Contains the implementation of the Thread
 	 */
+	@SuppressWarnings("deprecation")
 	public void messagesThread() {
 		while (true) {
 			try {

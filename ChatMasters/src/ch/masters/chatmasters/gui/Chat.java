@@ -1,21 +1,17 @@
 package ch.masters.chatmasters.gui;
 
 
-import java.awt.GridLayout;
-import java.awt.Point;
 import java.sql.Timestamp;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.DefaultCaret;
 
 import ch.masters.chatmasters.actionlistener.LogoutListener;
 import ch.masters.chatmasters.actionlistener.SendListener;
