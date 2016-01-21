@@ -52,7 +52,7 @@ public class ChatServerTest {
 		int removeClients = 2;
 		ArrayList<User> users = new ArrayList<User>();
 		
-		for(int i = 0; i < totalClients; i++){
+		for(int i = 0; i < addClients; i++){
 			String username = "User"+(i+1);
 			User user = new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis()));
 			chatServer.setClient(user);
@@ -64,7 +64,7 @@ public class ChatServerTest {
 		}
 		
 		int totClientsAftRmv = chatServer.returnClients().size();
-		Assert.assertEquals(totalClients-removeClients, totClientsAftRmv);
+		Assert.assertEquals(addClients-removeClients, totClientsAftRmv);
 	}
 	
 	@Test
