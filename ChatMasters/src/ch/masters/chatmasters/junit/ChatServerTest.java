@@ -35,11 +35,13 @@ public class ChatServerTest {
 	
 	@Test
 	public void checkSend() throws RemoteException {
-		int iterrations = 6;
+		int iterrations = 600;
 		int startSize = chatServer.returnMessages().size();
 		
 		for(int i = 0; i < iterrations; i++){
-			chatServer.send(new Message());
+			Message message = new Message();
+			message.setMsg(Integer.toString(i));
+			chatServer.send(message);
 		}
 		
 		int endSize = chatServer.returnMessages().size()-iterrations;
@@ -48,8 +50,8 @@ public class ChatServerTest {
 	
 	@Test
 	public void checkRmvClient() throws RemoteException {
-		int addClients = 4;
-		int removeClients = 2;
+		int addClients = 400;
+		int removeClients = 200;
 		ArrayList<User> users = new ArrayList<User>();
 		
 		for(int i = 0; i < addClients; i++){
@@ -69,7 +71,7 @@ public class ChatServerTest {
 	
 	@Test
 	public void checkSetClient() throws RemoteException {
-		int addClients = 6;
+		int addClients = 900;
 		int startSize = chatServer.returnClients().size();
 		
 		for(int i = 0; i < addClients; i++){
