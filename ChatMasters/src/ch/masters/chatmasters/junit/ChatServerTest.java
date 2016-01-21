@@ -23,10 +23,6 @@ import junit.framework.Assert;
 public class ChatServerTest {
 	private static ChatServer chatServer;
 
-	public ChatServerTest() {
-
-	}
-
 	@BeforeClass
 	public static void beforeClass(){
 		chatServer = ChatServer.createServer(1257);
@@ -56,7 +52,7 @@ public class ChatServerTest {
 		int removeClients = 2;
 		ArrayList<User> users = new ArrayList<User>();
 		
-		for(int i = 0; i < totalUsers; i++){
+		for(int i = 0; i < totalClients; i++){
 			String username = "User"+(i+1);
 			User user = new User(username, true, new Timestamp(Calendar.getInstance().getTimeInMillis()));
 			chatServer.setClient(user);
@@ -68,7 +64,7 @@ public class ChatServerTest {
 		}
 		
 		int totClientsAftRmv = chatServer.returnClients().size();
-		Assert.assertEquals(totalUsers-removeClients, totClientsAftRmv);
+		Assert.assertEquals(totalClients-removeClients, totClientsAftRmv);
 	}
 	
 	@Test
