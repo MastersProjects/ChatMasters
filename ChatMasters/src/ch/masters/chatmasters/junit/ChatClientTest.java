@@ -12,7 +12,8 @@ import ch.masters.chatmasters.rmi.ChatClient;
 import junit.framework.Assert;
 
 /**
- * JUnit test for the RegEx of ip
+ * JUnit test for the class ChatClientTest
+ * Tested Methodes testIP
  * @author Chiramed Phong Penglerd, Elia Perenzin, Luca Marti
  * @version 1.0
  */

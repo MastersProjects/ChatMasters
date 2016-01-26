@@ -15,7 +15,8 @@ import ch.masters.chatmasters.rmi.ChatServer;
 import junit.framework.Assert;
 
 /**
- * 
+ * Junit test for class ChatServerTest
+ * Tested Methodes checkSend, checkRmvClient, checkSetClient
  * @author Chiramed Phong Penglerd, Elia Perenzin, Luca Marti
  * @version 1.0
  */

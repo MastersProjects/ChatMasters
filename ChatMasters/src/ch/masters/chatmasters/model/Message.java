@@ -12,9 +12,6 @@ import java.util.Date;
  */
 public class Message implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	//Instanzvariablen
     private User sender;
