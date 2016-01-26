@@ -59,7 +59,6 @@ public interface ChatInterface extends Remote {
      
      /**
       * Resets the Server
-      * @param status
       * @throws RemoteException
       */
       void resetServer() throws RemoteException;
